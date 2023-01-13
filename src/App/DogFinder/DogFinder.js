@@ -5,7 +5,8 @@ import React, { useEffect, useState } from "react";
 import SubbreedSelector from './Form-items/Subbreed-Selector';
 import AmountSelector from './Form-items/Amount-Selector';
 import Submit from './Form-items/Submit';
-import DisplayArea from '../Display-Area';
+import DisplayArea from './Display-Area';
+import LoadingIcon from '../Loading-Icon/LoadingIcon.js'
 
 
 class DogFinder extends React.Component {
@@ -60,6 +61,9 @@ class DogFinder extends React.Component {
 
         return (
             <div className="dog-finder-form">
+                {isLoading ? <LoadingIcon></LoadingIcon>
+                    :  
+                    <>
                 <div className='intro-area'>
                     <p className='intro'>Welcome to Dog Finder! Here you can view images of all of your favourite dogs by breed and subreed! </p>
                     <button className='tell-me-how' id='tellMe' onClick={(e) => tellMe(e)}>Tell Me How!</button>
@@ -71,8 +75,7 @@ class DogFinder extends React.Component {
                 </div>
 
                     <div className="app-area">
-                        {/* {isLoading ? <LoadingIcon></LoadingIcon>
-                            :  */}
+                        
                             <form className='dog-finder' onSubmit={(e) => displayImages(e)}>
 
                                 <BreedSelector selectedBreed={selectedBreed} selectedSubBreed={selectedSubBreed} breeds={breeds} selectBreed={selectBreed}></BreedSelector>
@@ -89,7 +92,7 @@ class DogFinder extends React.Component {
                                 
                             </form>
 
-                        {/* } */}
+                        
                         <DisplayArea BreedsAreLoaded={BreedsAreLoaded}
                             selectedBreed={selectedBreed}
                             imageList={imageList}
@@ -97,6 +100,8 @@ class DogFinder extends React.Component {
                         </DisplayArea> 
                         
                     </div>
+                    </>
+                } 
             </div>
         );
     }

@@ -1,12 +1,14 @@
+import React, { useEffect, useState } from "react";
 import './App.scss';
 import DogFinder from './DogFinder/DogFinder.js'
-import React, { useEffect, useState } from "react";
 import LoadingIcon from './Loading-Icon/LoadingIcon.js';
-import Footer from './App-Elements/Footer.js';
-import Header from './App-Elements/Header.js';
+import Footer from './App-Elements/Footer/Footer.js';
+import Header from './App-Elements/Header/Header.js';
+import Userpage from './App-Elements/User/Userpage.js';
 import CookieBar from './Cookies/Cookie-bar.js';
 import { instanceOf } from 'prop-types';
 import { withCookies, Cookies } from 'react-cookie';
+import { Routes, Route } from "react-router-dom";
 
 class App extends React.Component {
 
@@ -33,7 +35,11 @@ class App extends React.Component {
       imageList: [],
       isLoading: true,
       cookiesAccepted: false,
-      user: cookies.get('user') || 'Null'
+      user: cookies.get('user') || 'Null',
+      favouriteImages: [],
+      favouriteSearches: [],
+      favouriteBreeds: [],
+      searchHistory: []
     };
     this.updateCookies = this.updateCookies.bind(this);
     this.setUser = this.setUser.bind(this);
@@ -93,12 +99,17 @@ class App extends React.Component {
     const cookiesAccepted = this.state.cookiesAccepted;
     if(cookiesAccepted === 'true'){
       const { cookies } = this.props;
+      let userItem = {
+        userName: userString,
+        stateDate: stateDate,
+        favourites: [],
+        userActive: true
+      }
 
-      cookies.set('user', userString, { path: '/' });
-      cookies.set('stateDate', stateDate, { path: '/' });
+      cookies.set('user', userItem, { path: '/' });
+      // cookies.set('stateDate', stateDate, { path: '/' });
       this.setState({ 
-        userString: userString,
-        stateDate: stateDate
+        user: userItem
        });
     }
   }
@@ -237,38 +248,43 @@ class App extends React.Component {
     const hasSubBreed = this.state.hasSubBreed;
     const viewMode = this.state.viewMode;
     const isLoading = this.state.isLoading;
+    const userIsActive = this.state.user.userActive ? this.state.user.userActive : '';
     // numbers
     const maxImages = this.state.maxImages;
+    
 
     return (
   
       <div className="App">
-        <Header></Header>
-        {isLoading ? <LoadingIcon></LoadingIcon>
-          : 
-          <DogFinder
+        <Routes>
+          <Route path="/" element={<Header userIsActive={userIsActive}/>}>
+            <Route index element={
+              <DogFinder 
               // booleons
-              BreedsAreLoaded={BreedsAreLoaded}
-              SubBreadsAreLoaded={SubBreadsAreLoaded}
-              hasSubBreed={hasSubBreed}
-              viewMode={viewMode}
-              isLoading={isLoading}
-              // arrays
-              breeds={breeds}
-              selectedBreed={selectedBreed}
-              subBreeds={subBreeds}
-              selectedSubBreed={selectedSubBreed}
-              imageList={imageList}
-              // numbers
-              imagesToShow={imagesToShow}
-              maxImages={maxImages}
-              // functions
-              selectBreed={selectBreed}
-              setNumber={setNumber}
-              displayImages={displayImages}
-              >
-            </DogFinder>
-          }
+                BreedsAreLoaded={BreedsAreLoaded}
+                SubBreadsAreLoaded={SubBreadsAreLoaded}
+                hasSubBreed={hasSubBreed}
+                viewMode={viewMode}
+                isLoading={isLoading}
+                // arrays
+                breeds={breeds}
+                selectedBreed={selectedBreed}
+                subBreeds={subBreeds}
+                selectedSubBreed={selectedSubBreed}
+                imageList={imageList}
+                // numbers
+                imagesToShow={imagesToShow}
+                maxImages={maxImages}
+                // functions
+                selectBreed={selectBreed}
+                setNumber={setNumber}
+                displayImages={displayImages}
+                />} 
+              />
+            <Route path="user" element={<Userpage />} />
+          </Route>
+        </Routes>
+        
         <Footer></Footer>
         <CookieBar updateCookies={updateCookies}></CookieBar>
       </div>
