@@ -14,11 +14,11 @@ class AmountSelector extends React.Component {
                 <select className='number-select' id='number' onChange={(e) => setNumber(e)}>
                     {
                         Array.from(Array(maxImages), (e, i) => {
-                            if (i === maxImages - 1) {
-                                return <option key={i}>All</option>
+                            if(i+1 === maxImages){
+                                return <option key={i + 1}>All</option>
                             } else {
+                                return <option key={i + 1}>{i + 1}</option>
 
-                                return <option key={i}>{i}</option>
                             }
                         })
                     }

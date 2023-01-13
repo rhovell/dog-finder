@@ -10,7 +10,7 @@ class Submit extends React.Component {
         return (
   
             <label htmlFor='submit'>
-                <button type='submit' className='subbreed-select' id='submit'>
+                <button type='submit' className='submit' id='submit'>
                     View Images
                 </button>
             </label>

@@ -1,0 +1,20 @@
+.results-area {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin-top: 15px;
+    height: 100%;
+    width: calc(100% - 40px);
+    padding: 30px 20px 20px;
+    min-height: 50vh;
+    border-top: 1px solid rgba(255, 255, 255, 0.521);
+    box-shadow: 1px -2px 3px 2px #FFFFFF;
+    .image-results {
+        display: flex;
+        flex-direction: column;
+        img {
+            width: 100%;
+            height: auto;
+        }
+    }
+}

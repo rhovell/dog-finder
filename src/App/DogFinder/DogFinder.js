@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import SubbreedSelector from './Form-items/Subbreed-Selector';
 import AmountSelector from './Form-items/Amount-Selector';
 import Submit from './Form-items/Submit';
-import DisplayArea from './Display-Area';
+import DisplayArea from '../Display-Area';
 
 
 class DogFinder extends React.Component {
@@ -56,7 +56,7 @@ class DogFinder extends React.Component {
 
         
 
-        if (!BreedsAreLoaded) return <div className="loading-area">Loading...</div>
+        // if (!BreedsAreLoaded) return <div className="loading-area">Loading...</div>
 
         return (
             <div className="dog-finder-form">
@@ -70,25 +70,26 @@ class DogFinder extends React.Component {
                     
                 </div>
 
-                {isLoading ? <div className="loading">...</div>
-                    : 
                     <div className="app-area">
-                        <form className='dog-finder' onSubmit={(e) => displayImages(e)}>
+                        {/* {isLoading ? <LoadingIcon></LoadingIcon>
+                            :  */}
+                            <form className='dog-finder' onSubmit={(e) => displayImages(e)}>
 
-                            <BreedSelector breeds={breeds} selectBreed={selectBreed}></BreedSelector>
+                                <BreedSelector selectedBreed={selectedBreed} selectedSubBreed={selectedSubBreed} breeds={breeds} selectBreed={selectBreed}></BreedSelector>
 
-                            {hasSubBreed ? <SubbreedSelector subBreeds={subBreeds} selectSubBreed={selectSubBreed}></SubbreedSelector>
-                            :
-                            <></>}
-                            
-                            {SubBreadsAreLoaded ? <AmountSelector maxImages={maxImages} setNumber={setNumber}></AmountSelector>
-                            : <></>}
+                                {hasSubBreed ? <SubbreedSelector subBreeds={subBreeds} selectSubBreed={selectSubBreed}></SubbreedSelector>
+                                :
+                                <></>}
+                                
+                                {SubBreadsAreLoaded ? <AmountSelector maxImages={maxImages} setNumber={setNumber}></AmountSelector>
+                                : <></>}
 
-                            {SubBreadsAreLoaded ? <Submit></Submit>
-                            : <></>}
-                            
-                        </form>
+                                {SubBreadsAreLoaded ? <Submit></Submit>
+                                : <></>}
+                                
+                            </form>
 
+                        {/* } */}
                         <DisplayArea BreedsAreLoaded={BreedsAreLoaded}
                             selectedBreed={selectedBreed}
                             imageList={imageList}
@@ -96,7 +97,6 @@ class DogFinder extends React.Component {
                         </DisplayArea> 
                         
                     </div>
-                }
             </div>
         );
     }

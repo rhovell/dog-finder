@@ -1,7 +1,6 @@
 import './App.scss';
-import DogFinder from './DogFinder/DogFinder.js'
+import DogFinder from '../DogFinder/DogFinder.js'
 import React, { useEffect, useState } from "react";
-import LoadingIcon from './Loading-Icon/LoadingIcon.js';
 
 
 class App extends React.Component {
@@ -22,16 +21,15 @@ class App extends React.Component {
       viewMode: false,
       imagesToShow: 1,
       imageList: [],
-      isLoading: true
+      isLoading: false
     };
     this.selectBreed = this.selectBreed.bind(this);
-    this.setSubBreeds = this.setSubBreeds.bind(this);
-    // this.fetchSubBreeds = this.fetchSubBreeds.bind(this);
-    // this.selectSubBreed = this.selectSubBreed.bind(this);
+    this.fetchSubBreeds = this.fetchSubBreeds.bind(this);
+    this.selectSubBreed = this.selectSubBreed.bind(this);
     this.fetchImages = this.fetchImages.bind(this);
     this.displayImages = this.displayImages.bind(this);
     this.setNumber = this.setNumber.bind(this);
-    // this.fetchImagesAPI = this.fetchImagesAPI.bind(this);
+    this.fetchImagesAPI = this.fetchImagesAPI.bind(this);
   }
 
   componentDidMount() {
@@ -54,12 +52,12 @@ class App extends React.Component {
   componentDidUpdate(prevProps, prevState, snapshot){
     // console.warn('prevState', prevState.selectedBreed);
     if(this.state.selectedBreed != prevState.selectedBreed){
-      // this.fetchSubBreeds()
+      this.fetchSubBreeds()
     }
   }
 
-  selectBreed(selectedBreed) {
-    console.warn('selectBreed(event)', selectedBreed)
+  selectBreed(event) {
+    // console.warn('selectBreed(event)')
     // if (this.state.selectedBreed != []){
       this.setState({
         selectedBreed: [],
@@ -71,33 +69,63 @@ class App extends React.Component {
         maxImages: 0,
         viewMode: false,
         imagesToShow: 1,
-        imageList: [],
-        isLoading: true
+        imageList: []
       })
     // }
-    selectedBreed = selectedBreed.toLowerCase();
+    let selectedBreed = event.target.value.toLowerCase();
     // console.warn('selectedBreed',selectedBreed)
     this.setState({
-      selectedBreed: selectedBreed
-    }, this.setSubBreeds) 
-
-  }
-
-  setSubBreeds(){
-    const selectedBreed = this.state.selectedBreed;
-    const subBreeds = this.state.breeds[selectedBreed] ? this.state.breeds[selectedBreed] : [];
-    this.setState({
-      subBreeds: subBreeds,
-      SubBreadsAreLoaded: true
-    }, this.fetchImages)
-    if(subBreeds.length > 0){
-      this.setState({
-        hasSubBreed: true
-      })
-    }
-    console.warn(subBreeds);
+      selectedBreed: selectedBreed,
+      isLoading: true
+    }, this.fetchSubBreeds) 
   }
     
+  fetchSubBreeds() {
+    const selectedBreed = this.state.selectedBreed;
+    // console.warn('selectedBreed', selectedBreed)
+    fetch('https://dog.ceo/api/breed/' + selectedBreed + '/list')
+      .then((res) => res.json())
+      .then((json) => {
+        // console.warn('json.message',json.message)
+        if (json.message[selectedBreed]){
+          this.setState({
+            subBreeds: json.message[selectedBreed],
+          });
+        }
+      }).then(() => {
+        // console.warn('subBreeds',this.state.subBreeds);
+        if (this.state.subBreeds.length > 0) {
+          this.setState({
+            hasSubBreed: true
+          });
+        } else {
+          this.setState({
+            hasSubBreed: false
+          }, this.fetchImages);
+        }
+        this.setState({
+          SubBreadsAreLoaded: true,
+          isLoading: false
+        });
+
+      }).catch((error) => {
+        console.warn('fetchSubBreeds error', error)
+      })
+  }
+
+
+  selectSubBreed(event) {
+    // console.warn('selectSubBreed event triggered')
+    let selectedSubBreed = event.target.value.toLowerCase();
+    // console.warn(selectedSubBreed)
+    this.setState({
+      selectedSubBreed: selectedSubBreed,
+      isLoading: true
+    }, this.fetchSubBreeds)
+    // this.fetchImages()
+    // console.warn(this.state.selectedSubBreed)      
+  }
+
   fetchImages(){
     // console.warn('fetchImages')
     const breed = this.state.selectedBreed;
@@ -107,7 +135,7 @@ class App extends React.Component {
     let breedOnly = 'https://dog.ceo/api/breed/' + breed + '/images';
     let subs = 'https://dog.ceo/api/breed/' + breed + '/' + selectedSubBreed + '/images';
     let urls = [];
-    if (hasSubBreed && selectedSubBreed != ''){
+    if (hasSubBreed){
       urls.push(breedOnly, subs);
       // console.warn('url', urls)
     } else {
@@ -142,36 +170,26 @@ class App extends React.Component {
     event.preventDefault();
     const imagesToShow = this.state.imagesToShow;
     this.setState({
-      viewMode: true,
-      isLoading: true
+      viewMode: true
     })
     let newImages = this.state.images.filter((image,index) => index < imagesToShow)
       this.setState({
-        imageList: newImages,
-        isLoading: false
+        imageList: newImages
       })
 
   }
 
   setNumber(event){
-    const maxImages = this.state.maxImages;
-    if(event.target.value === 'All'){
-      this.setState({
-        imagesToShow: maxImages
-      })
-
-    } else {
-      this.setState({
-        imagesToShow: event.target.value
-      })
-
-    }
+    this.setState({
+      imagesToShow: event.target.value
+    })
   }
 
     
   render(){
       
     // functions
+    const selectSubBreed = this.selectSubBreed;
     const displayImages = this.displayImages;
     const setNumber = this.setNumber;
     const selectBreed = this.selectBreed;
@@ -198,31 +216,28 @@ class App extends React.Component {
         <header className="App-header">
           <h1>Dog Finder</h1>
         </header>
-        {isLoading ? <LoadingIcon></LoadingIcon>
-          : 
-          <DogFinder
-              // booleons
-              BreedsAreLoaded={BreedsAreLoaded}
-              SubBreadsAreLoaded={SubBreadsAreLoaded}
-              hasSubBreed={hasSubBreed}
-              viewMode={viewMode}
-              isLoading={isLoading}
-              // arrays
-              breeds={breeds}
-              selectedBreed={selectedBreed}
-              subBreeds={subBreeds}
-              selectedSubBreed={selectedSubBreed}
-              imageList={imageList}
-              // numbers
-              imagesToShow={imagesToShow}
-              maxImages={maxImages}
-              // functions
-              selectBreed={selectBreed}
-              setNumber={setNumber}
-              displayImages={displayImages}
-              >
-            </DogFinder>
-          }
+        <DogFinder
+            // booleons
+            BreedsAreLoaded={BreedsAreLoaded}
+            SubBreadsAreLoaded={SubBreadsAreLoaded}
+            hasSubBreed={hasSubBreed}
+            viewMode={viewMode}
+            isLoading={isLoading}
+            // arrays
+            breeds={breeds}
+            selectedBreed={selectedBreed}
+            subBreeds={subBreeds}
+            selectedSubBreed={selectedSubBreed}
+            imageList={imageList}
+            // numbers
+            imagesToShow={imagesToShow}
+            maxImages={maxImages}
+            // functions
+            selectBreed={selectBreed}
+            selectSubBreed={selectSubBreed}
+            setNumber={setNumber}
+            displayImages={displayImages}>
+          </DogFinder>
       </div>
     );
   }

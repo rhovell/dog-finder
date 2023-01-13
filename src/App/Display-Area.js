@@ -1,6 +1,7 @@
-import './DogFinder.scss';
-import BreedSelector from './Form-items/Breed-Selector.js' 
+import './DogFinder/DogFinder.scss';
+import BreedSelector from './DogFinder/Form-items/Breed-Selector.js' 
 import React from "react";
+import './results-area.scss'
 
 
 class DisplayArea extends React.Component {
@@ -9,7 +10,7 @@ class DisplayArea extends React.Component {
         super(props);
 
         this.state = {
-
+            viewMode: "column"
         };
 
     }
@@ -28,17 +29,16 @@ class DisplayArea extends React.Component {
         const selectedBreed = this.props.selectedBreed;
         const imageList = this.props.imageList;
         const selectedSubBreed = this.props.selectedSubBreed ? this.props.selectedSubBreed : '';
-
-        
-
-        if (!BreedsAreLoaded) return <div className="loading-area">Loading...</div>
+        const imageTitle = this.props.selectedSubBreed != '' ? selectedBreed + ', ' + selectedSubBreed : selectedBreed;
 
         return (
             <div className="results-area">
                 <div className="image-results">
                     {
                         imageList.map((image, i) => (
-                            <img key={'dog' + i}  src={image}></img>
+                            <div className='image-container' key={'dog' + i}>
+                                <img alt={imageTitle} title={imageTitle} src={image}></img>
+                            </div>
                         ))
                     }
                 </div>
