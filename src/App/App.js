@@ -4,13 +4,20 @@ import React, { useEffect, useState } from "react";
 import LoadingIcon from './Loading-Icon/LoadingIcon.js';
 import Footer from './App-Elements/Footer.js';
 import Header from './App-Elements/Header.js';
-
+import CookieBar from './Cookies/Cookie-bar.js';
+import { instanceOf } from 'prop-types';
+import { withCookies, Cookies } from 'react-cookie';
 
 class App extends React.Component {
+
+  static propTypes = {
+    cookies: instanceOf(Cookies).isRequired
+  };
 
   constructor(props) {
     super(props);
 
+    const { cookies } = props;
     this.state = {
       breeds: [],
       BreedsAreLoaded: false,
@@ -24,8 +31,12 @@ class App extends React.Component {
       viewMode: false,
       imagesToShow: 1,
       imageList: [],
-      isLoading: true
+      isLoading: true,
+      cookiesAccepted: false,
+      user: cookies.get('user') || 'Null'
     };
+    this.updateCookies = this.updateCookies.bind(this);
+    this.setUser = this.setUser.bind(this);
     this.selectBreed = this.selectBreed.bind(this);
     this.setSubBreeds = this.setSubBreeds.bind(this);
     // this.fetchSubBreeds = this.fetchSubBreeds.bind(this);
@@ -57,6 +68,38 @@ class App extends React.Component {
     // console.warn('prevState', prevState.selectedBreed);
     if(this.state.selectedBreed != prevState.selectedBreed){
       // this.fetchSubBreeds()
+    }
+  }
+    
+  updateCookies(cookieAccepted){
+    this.setState({
+      cookiesAccepted: cookieAccepted
+    }, this.setUser)
+  }
+
+  setUser(){
+    // generate user string
+    let userString = 'user' + stringGen(10);
+    let stateDate = new Date();
+    function stringGen(len) {
+      var text = "";
+      var charset = "abcdefghijklmnopqrstuvwxyz0123456789";
+      for (var i = 0; i < len; i++)
+        text += charset.charAt(Math.floor(Math.random() * charset.length));
+      return text;
+    }
+
+    // only if cookies have been accepted...
+    const cookiesAccepted = this.state.cookiesAccepted;
+    if(cookiesAccepted === 'true'){
+      const { cookies } = this.props;
+
+      cookies.set('user', userString, { path: '/' });
+      cookies.set('stateDate', stateDate, { path: '/' });
+      this.setState({ 
+        userString: userString,
+        stateDate: stateDate
+       });
     }
   }
 
@@ -177,6 +220,7 @@ class App extends React.Component {
     const displayImages = this.displayImages;
     const setNumber = this.setNumber;
     const selectBreed = this.selectBreed;
+    const updateCookies = this.updateCookies;
     // states
     // arrays
     const breeds = Object.keys(this.state.breeds);
@@ -185,7 +229,9 @@ class App extends React.Component {
     const subBreeds = this.state.subBreeds;
     const imagesToShow = this.state.imagesToShow;
     const imageList = this.state.imageList;
+    const {user} = this.state.user;
     // booleons
+    // const cookiesAccepted = this.state.cookiesAccepted;
     const BreedsAreLoaded = this.state.BreedsAreLoaded;
     const SubBreadsAreLoaded = this.state.SubBreadsAreLoaded;
     const hasSubBreed = this.state.hasSubBreed;
@@ -224,9 +270,10 @@ class App extends React.Component {
             </DogFinder>
           }
         <Footer></Footer>
+        <CookieBar updateCookies={updateCookies}></CookieBar>
       </div>
     );
   }
 }
 
-export default App;
+export default withCookies(App);

@@ -5,8 +5,7 @@ class Header extends React.Component {
 
 
     render() {
-        const maxImages = this.props.maxImages
-        const setNumber = this.props.setNumber
+
         return (
 
             <header className="App-header">
