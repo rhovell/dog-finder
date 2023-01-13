@@ -2,6 +2,8 @@ import './App.scss';
 import DogFinder from './DogFinder/DogFinder.js'
 import React, { useEffect, useState } from "react";
 import LoadingIcon from './Loading-Icon/LoadingIcon.js';
+import Footer from './App-Elements/Footer.js';
+import Header from './App-Elements/Header.js';
 
 
 class App extends React.Component {
@@ -195,9 +197,7 @@ class App extends React.Component {
     return (
   
       <div className="App">
-        <header className="App-header">
-          <h1>Dog Finder</h1>
-        </header>
+        <Header></Header>
         {isLoading ? <LoadingIcon></LoadingIcon>
           : 
           <DogFinder
@@ -223,6 +223,7 @@ class App extends React.Component {
               >
             </DogFinder>
           }
+        <Footer></Footer>
       </div>
     );
   }

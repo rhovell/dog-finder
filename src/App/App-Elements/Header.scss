@@ -1,0 +1,12 @@
+header.App-header {
+    position: fixed;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    background-color: #282c34;
+    width: 100%;
+    text-align: center;
+    z-index: 1;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.521);
+    box-shadow: 3px 2px 3px 2px #fff;
+}
