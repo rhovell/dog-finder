@@ -1,4 +1,4 @@
-import BreedSelector from './Form-items/Breed-Selector.js' 
+import BreedSelector from '../Form-items/Breed-Selector.js' 
 import React from "react";
 import './results-area.scss'
 import FavouriteContainer from './FavouriteContainer.js'

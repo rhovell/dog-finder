@@ -1,7 +1,7 @@
 import React from "react";
 import './Userpage.scss'
-import FavouriteContainer from '../DogFinder/FavouriteContainer.js'
-import { ReactComponent as DogPaw } from '../DogFinder/dog-paw.svg'
+import FavouriteContainer from '../DogFinder/Displays/FavouriteContainer.js'
+import { ReactComponent as DogPaw } from '../DogFinder/Displays/dog-paw.svg'
 import { Outlet, Link } from "react-router-dom";
 
 class Userpage extends React.Component {

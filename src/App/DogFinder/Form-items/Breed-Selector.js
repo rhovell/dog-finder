@@ -12,6 +12,14 @@ class BreedSelector extends React.Component {
         this.setBreed = this.setBreed.bind(this);
     }
 
+    componentDidMount(){
+        if(this.props.selectedBreed != this.state.value){
+            this.setState({
+                value: this.props.selectedBreed
+            })
+        }
+    }
+
     handleChange = (e) => {
         e.preventDefault()
         let selectedValue = e.target.value;
@@ -34,15 +42,15 @@ class BreedSelector extends React.Component {
     render() {
         // const selectBreed = this.props.selectBreed
         const breeds = this.props.breeds
-        const value = this.state.value
         const selectedBreed = this.props.selectedBreed ? this.props.selectedBreed : '';
+        const value = this.state.value;
         const handleChange = this.handleChange;
 
         return (
   
             <label htmlFor='breed'>
                 <p>Choose a Breed</p>
-                <select className='breed-select' id='breed' onChange={(e) => handleChange(e)} value={selectedBreed}>
+                <select className='breed-select' id='breed' onChange={(e) => handleChange(e)} value={value} >
                     <option className="placeholder">Choose a breed</option>
                     {
                         breeds.map((breed) => (

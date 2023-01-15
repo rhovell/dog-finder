@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import './App.scss';
-import DogFinder from './DogFinder/DogFinder.js'
-import LoadingIcon from './Loading-Icon/LoadingIcon.js';
+import DogFinder from './DogFinder/Displays/DogFinder.js'
 import Footer from './App-Elements/Footer/Footer.js';
 import Header from './App-Elements/Header/Header.js';
 import Userpage from './User/Userpage.js';

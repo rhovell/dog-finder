@@ -1,10 +1,10 @@
 import './DogFinder.scss';
-import './Form-items/form.scss';
-import BreedSelector from './Form-items/Breed-Selector.js' 
-import React, { useEffect, useState } from "react";
-import SubbreedSelector from './Form-items/Subbreed-Selector';
-import AmountSelector from './Form-items/Amount-Selector';
-import Submit from './Form-items/Submit';
+import '../Form-items/form.scss';
+import BreedSelector from '../Form-items/Breed-Selector.js' 
+import React from "react";
+import SubbreedSelector from '../Form-items/Subbreed-Selector';
+import AmountSelector from '../Form-items/Amount-Selector';
+import Submit from '../Form-items/Submit';
 import DisplayArea from './Display-Area';
 import LoadingIcon from '../Loading-Icon/LoadingIcon.js'
 
