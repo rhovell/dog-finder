@@ -282,7 +282,7 @@ class App extends React.Component {
 
   setFaveCookies(newFavourites){
     const { cookies } = this.props;
-    let userData = cookies.get('user')
+    // let userData = cookies.get('user')
     let userItem = {
       userName: this.state.user.userName,
       stateDate: this.state.user.stateDate,

@@ -43,7 +43,7 @@ class DisplayArea extends React.Component {
                 <div className="image-results">
                     {
                         imageList.map((image, i) => (
-                            <div key = {'dog' + i}>
+                            <div className="grid-box" key = {'dog' + i}>
                                 <div className='image-container' >
                                     {userIsActive ?
                                     <FavouriteContainer

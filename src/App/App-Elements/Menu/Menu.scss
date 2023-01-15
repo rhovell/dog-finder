@@ -1,6 +1,7 @@
 .nav-container {
     position: relative;
     .menu-toggle-button {
+        cursor: pointer;
         svg {
             width: 100%;
             height: auto;
@@ -19,7 +20,7 @@
     bottom: 0;
     width: 100vw;
     height: 100vh;
-    z-index: 2;
+    z-index: 5;
     background: rgba(0, 0, 0, 0.5);
     // filter: blur(8px);
     nav.user-navigation {
@@ -40,6 +41,7 @@
             top: 10px;
             right: 10px;
             z-index: 1;
+            cursor: pointer;
             svg {
                 width: 100%;
                 height: auto;
@@ -78,4 +80,36 @@
         }
     }
 
+}
+
+@media screen and (min-width: 1024px){
+    .user-nav-container {
+
+        nav.user-navigation {
+            width: 20%;
+            padding: 40px 40px 20px;
+
+            .menu-closer {
+                width: auto;
+                height: auto;
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                z-index: 1;
+                svg {
+                    width: 80px;
+                    height: auto;
+                }
+            }
+
+            ul.nav-list {
+                li.nav-item {
+                    a.nav-link {
+                        font-size: 32px;
+                    }
+                }
+            }
+        }
+
+    }
 }

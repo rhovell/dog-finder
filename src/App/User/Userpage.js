@@ -56,7 +56,7 @@ class Userpage extends React.Component {
                             {
                                 sortedImages.map((image, i) => (
                                     <div className="dog-image" key={'dog' + i}>
-                                        <p>{image.title}</p>
+                                        <p>{image.title[0].toUpperCase() + image.title.slice(1)}</p>
                                         <div className='image-container'>
                                             <FavouriteContainer 
                                             imageTitle={image.title} 

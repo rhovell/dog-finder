@@ -16,6 +16,7 @@ form.dog-finder {
         select {
             padding: 7px 12px 12px 7px;
             font-size: 1rem;
+            border-radius: 6px;
         }
         button {
             &.submit {
@@ -31,6 +32,27 @@ form.dog-finder {
                 &:hover {
                     translate: 0px 2px;
                     box-shadow: 0px 0px 5px 4px rgb(49 48 48 / 52%);
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1024px){
+    form.dog-finder {
+
+        label {
+
+
+            select {
+                padding: 1em;
+                font-size: 24px;
+            }
+
+            button {
+                &.submit {
+                    padding: 15px 18px;
+                    font-size: 32px;
                 }
             }
         }

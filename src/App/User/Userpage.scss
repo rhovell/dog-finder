@@ -17,3 +17,42 @@
         }
     }
 }
+@media screen and (min-width: 768px) {
+    .userpage {
+    padding: 130px 20px 20px;
+        .favourite-images {
+            flex-direction: row;
+            align-items: center;
+            flex-wrap: wrap;
+            align-content: center;
+            justify-content: center;
+            .dog-image {
+                width: calc(50% - 20px);
+                padding: 10px;
+                .image-container {
+                }
+            }
+        }
+    }
+}
+@media screen and (min-width: 1024px) {
+    .userpage {
+        padding: 190px 20px 20px;
+        .favourite-images {
+            flex-direction: row;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            align-content: center;
+            justify-content: center;
+            .dog-image {
+                width: calc(25% - 20px);
+                padding: 10px;
+                .image-container {
+                    img {
+                        max-width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -63,3 +63,22 @@
         height: 100%;
     }
 }
+
+@media screen and (min-width: 768px){
+    .dog-finder-form {
+        padding-top: 130px;
+    }
+}
+@media screen and (min-width: 1024px){
+    .dog-finder-form {
+        padding-top: 190px;
+        .intro-area {
+    
+            button {
+                &.tell-me-how {
+                    font-size: 32px;
+                }
+            }
+        }
+    }
+}

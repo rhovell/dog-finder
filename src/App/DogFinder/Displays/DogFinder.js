@@ -8,7 +8,6 @@ import Submit from '../Form-items/Submit';
 import DisplayArea from './Display-Area';
 import LoadingIcon from '../Loading-Icon/LoadingIcon.js';
 import ScrollUpButton from '../../ScrollUpButton.js';
-// C: \Users\rhove\React\Dog - Finder\dog - finder\src\App\ScrollUpButton.js
 
 class DogFinder extends React.Component {
 
@@ -22,8 +21,8 @@ class DogFinder extends React.Component {
 
     }
 
-    shouldComponentUpdate(nextProps) {
-        if (this.props.favouriteImages != nextProps.favouriteImages || this.props.showScrollBtn != nextProps.showScrollBtn) {
+    shouldComponentUpdate(nextProps, nextState) {
+        if (this.props != nextProps || this.state != nextState) {
             return true
         } else {
             return false
@@ -106,7 +105,7 @@ class DogFinder extends React.Component {
                         </DisplayArea> 
                         
                     </div>
-                        {showScrollBtn ? <ScrollUpButton scrollTop={scrollTop}></ScrollUpButton> : <></>}
+                {showScrollBtn ? <ScrollUpButton scrollTop={scrollTop}></ScrollUpButton> : <></>}
                 </>
                 } 
             </div>

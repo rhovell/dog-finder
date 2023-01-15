@@ -26,18 +26,10 @@ class FavouriteContainer extends React.Component {
         }
     }
 
-    shouldComponentUpdate(nextState) {
-        if (this.props.favouriteImages !== nextState.favouriteImages) {
-            return true
-        } else {
-            return false
-        };
-    }
-
     handleClick(e, i, image, imageTitle, id, isFave){
         e.preventDefault();
         this.setState({
-            active: !isFave
+            active: !this.state.active
         })
         this.props.handleFavouriteToggle(i, image, imageTitle, id, isFave)
     }
