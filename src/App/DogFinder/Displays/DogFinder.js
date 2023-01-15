@@ -6,8 +6,9 @@ import SubbreedSelector from '../Form-items/Subbreed-Selector';
 import AmountSelector from '../Form-items/Amount-Selector';
 import Submit from '../Form-items/Submit';
 import DisplayArea from './Display-Area';
-import LoadingIcon from '../Loading-Icon/LoadingIcon.js'
-
+import LoadingIcon from '../Loading-Icon/LoadingIcon.js';
+import ScrollUpButton from '../../ScrollUpButton.js';
+// C: \Users\rhove\React\Dog - Finder\dog - finder\src\App\ScrollUpButton.js
 
 class DogFinder extends React.Component {
 
@@ -19,6 +20,14 @@ class DogFinder extends React.Component {
         };
         this.tellMe = this.tellMe.bind(this)
 
+    }
+
+    shouldComponentUpdate(nextProps) {
+        if (this.props.favouriteImages != nextProps.favouriteImages || this.props.showScrollBtn != nextProps.showScrollBtn) {
+            return true
+        } else {
+            return false
+        };
     }
 
     tellMe(e){
@@ -48,6 +57,8 @@ class DogFinder extends React.Component {
         const favouriteImages = this.props.favouriteImages;
         const addFavouriteImage = this.props.addFavouriteImage;
         const userIsActive = this.props.userIsActive;
+        const showScrollBtn = this.props.showScrollBtn;
+        const scrollTop = this.props.scrollTop;
         const tellMe = this.tellMe;
 
         return (
@@ -95,6 +106,7 @@ class DogFinder extends React.Component {
                         </DisplayArea> 
                         
                     </div>
+                        {showScrollBtn ? <ScrollUpButton scrollTop={scrollTop}></ScrollUpButton> : <></>}
                 </>
                 } 
             </div>

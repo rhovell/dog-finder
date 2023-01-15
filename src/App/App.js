@@ -35,7 +35,8 @@ class App extends React.Component {
       isLoading: true,
       cookiesAccepted: false,
       user: cookies.get('user') || 'Null',
-      favouriteImages: []
+      favouriteImages: [],
+      showScrollBtn: false
     };
     this.updateCookies = this.updateCookies.bind(this);
     this.setUser = this.setUser.bind(this);
@@ -48,9 +49,12 @@ class App extends React.Component {
     this.handleCheck = this.handleCheck.bind(this);
     this.setFaveCookies = this.setFaveCookies.bind(this);
     this.checkForUser = this.checkForUser.bind(this);
+    this.onScroll = this.onScroll.bind(this);
+    // this.isBottom = this.isBottom.bind(this);
   }
 
   componentDidMount() {
+    document.addEventListener('scroll', this.onScroll);
     fetch(
       "https://dog.ceo/api/breeds/list/all")
       .then((res) => res.json())
@@ -64,6 +68,26 @@ class App extends React.Component {
         console.warn('error')
       })
       this.checkForUser()
+  }
+
+  onScroll(e){
+    const wrappedElement = document.getElementById('app');
+    if (isBottom(wrappedElement)) {
+      this.setState({
+        showScrollBtn: true
+      })
+    } else {
+      this.setState({
+        showScrollBtn: false
+      })
+    }
+    function isBottom(el) {
+      return el.getBoundingClientRect().top <= -350;
+    }
+  }
+
+  scrollTop(){
+    window.scrollTo(0, 0);
   }
 
   checkForUser(){
@@ -277,6 +301,7 @@ class App extends React.Component {
     const selectBreed = this.selectBreed;
     const updateCookies = this.updateCookies;
     const addFavouriteImage = this.addFavouriteImage;
+    const scrollTop = this.scrollTop;
 
     // states
     // arrays
@@ -295,13 +320,14 @@ class App extends React.Component {
     const viewMode = this.state.viewMode;
     const isLoading = this.state.isLoading;
     const userIsActive = this.state.user.userActive ? this.state.user.userActive : '';
+    const showScrollBtn = this.state.showScrollBtn;
     // numbers
     const maxImages = this.state.maxImages;
     
 
     return (
   
-      <div className="App">
+      <div className="App" id="app">
         <Routes>
           <Route path="/" element={<Header userIsActive={userIsActive}/>}>
             <Route index element={
@@ -313,6 +339,7 @@ class App extends React.Component {
                 viewMode={viewMode}
                 isLoading={isLoading}
                 userIsActive={userIsActive}
+                showScrollBtn={showScrollBtn}
                 // arrays
                 breeds={breeds}
                 selectedBreed={selectedBreed}
@@ -328,11 +355,14 @@ class App extends React.Component {
                 setNumber={setNumber}
                 displayImages={displayImages}
                 addFavouriteImage={addFavouriteImage}
+                scrollTop={scrollTop}
                 />} 
               />
             <Route path="favourites" element={
-              <Userpage favouriteImages={favouriteImages} addFavouriteImage={addFavouriteImage} 
+              <Userpage scrollTop={scrollTop} showScrollBtn={showScrollBtn} favouriteImages={favouriteImages} addFavouriteImage={addFavouriteImage} 
               />} />
+            
+            
           </Route>
         </Routes>
         
