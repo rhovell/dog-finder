@@ -1,0 +1,23 @@
+.userpage {
+    display: flex;
+    width: 100%;
+    padding-top: 110px;
+    position: relative;
+    height: 100%;
+    flex-direction: column;
+    padding-bottom: 40px;
+    .favourite-images {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .image-container {
+            position: relative;
+            margin: 10px 0;
+            img.search-result-image {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+        }
+    }
+}

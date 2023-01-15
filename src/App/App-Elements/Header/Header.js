@@ -9,6 +9,7 @@ class Header extends React.Component {
 
     render() {
         const userIsActive = this.props.userIsActive;
+        const favouriteImages = this.props.favouriteImages;
 
         return (
             <>
@@ -17,11 +18,11 @@ class Header extends React.Component {
                     <h1>Dog Finder</h1>
                 </div>
                 {userIsActive ? 
-                    <AppMenu></AppMenu>
+                        <AppMenu favouriteImages={favouriteImages}></AppMenu>
                 : <></>
                 }
             </header>
-                <Outlet />
+                <Outlet favouriteImages={favouriteImages}/>
                 </>
 
         );

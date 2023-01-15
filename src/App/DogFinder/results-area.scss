@@ -1,7 +1,7 @@
 .results-area {
     display: flex;
     flex-wrap: wrap;
-    flex-direction: row;
+    flex-direction: column;
     margin-top: 15px;
     height: 100%;
     width: calc(100% - 40px);
@@ -9,12 +9,37 @@
     min-height: 50vh;
     border-top: 1px solid rgba(255, 255, 255, 0.521);
     box-shadow: 1px -2px 3px 2px #FFFFFF;
+    align-items: center;
     .image-results {
         display: flex;
         flex-direction: column;
-        img {
-            width: 100%;
-            height: auto;
+        align-items: center;
+        .image-container {
+            position: relative;
+            margin: 10px 0;
+            .favourites-container {
+                position: absolute;
+                width: calc(100% - 40px);
+                height: calc(100% - 40px);
+                top: 0;
+                left: 0;
+                display: flex;
+                z-index: 1;
+                justify-content: flex-end;
+                padding: 20px;
+                align-items: flex-start;
+                cursor: pointer;
+                pointer-events: none;
+                svg.favourite-image {
+                    pointer-events: all;
+
+                }
+            }
+            img.search-result-image {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
         }
     }
 }

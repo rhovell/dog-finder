@@ -54,6 +54,8 @@ class DogFinder extends React.Component {
         const tellMe = this.tellMe;
         const howToActive = this.state.howToActive;
         const isLoading = this.props.isLoading;
+        const favouriteImages = this.props.favouriteImages;
+        const addFavouriteImage = this.props.addFavouriteImage;
 
         
 
@@ -96,7 +98,9 @@ class DogFinder extends React.Component {
                         <DisplayArea BreedsAreLoaded={BreedsAreLoaded}
                             selectedBreed={selectedBreed}
                             imageList={imageList}
-                            selectedSubBreed={selectedSubBreed}>
+                            selectedSubBreed={selectedSubBreed}
+                            favouriteImages={favouriteImages}
+                            addFavouriteImage={addFavouriteImage}>
                         </DisplayArea> 
                         
                     </div>

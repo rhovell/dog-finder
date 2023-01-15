@@ -4,7 +4,7 @@ import DogFinder from './DogFinder/DogFinder.js'
 import LoadingIcon from './Loading-Icon/LoadingIcon.js';
 import Footer from './App-Elements/Footer/Footer.js';
 import Header from './App-Elements/Header/Header.js';
-import Userpage from './App-Elements/User/Userpage.js';
+import Userpage from './User/Userpage.js';
 import CookieBar from './Cookies/Cookie-bar.js';
 import { instanceOf } from 'prop-types';
 import { withCookies, Cookies } from 'react-cookie';
@@ -45,12 +45,13 @@ class App extends React.Component {
     this.setUser = this.setUser.bind(this);
     this.selectBreed = this.selectBreed.bind(this);
     this.setSubBreeds = this.setSubBreeds.bind(this);
-    // this.fetchSubBreeds = this.fetchSubBreeds.bind(this);
-    // this.selectSubBreed = this.selectSubBreed.bind(this);
     this.fetchImages = this.fetchImages.bind(this);
     this.displayImages = this.displayImages.bind(this);
     this.setNumber = this.setNumber.bind(this);
-    // this.fetchImagesAPI = this.fetchImagesAPI.bind(this);
+    this.addFavouriteImage = this.addFavouriteImage.bind(this);
+    this.handleCheck = this.handleCheck.bind(this);
+    this.setFaveCookies = this.setFaveCookies.bind(this);
+    this.checkForUser = this.checkForUser.bind(this);
   }
 
   componentDidMount() {
@@ -58,23 +59,38 @@ class App extends React.Component {
       "https://dog.ceo/api/breeds/list/all")
       .then((res) => res.json())
       .then((json) => {
-        // console.warn(json)
         this.setState({
           breeds: json.message,
           BreedsAreLoaded: true,
           isLoading: false
         });
-        // console.warn(this.state.breeds)
       }).catch((error) => {
         console.warn('error')
       })
+      this.checkForUser()
+  }
+
+  checkForUser(){
+    const { cookies } = this.props;
+    let userData = cookies.get('user')
+    if (userData){
+      console.warn('user exists');
+      let userItem = {
+        userName: userData.userName,
+        stateDate: userData.stateDate,
+        favourites: userData.favourites,
+        userActive: userData.userActive
+      }
+      this.setState({
+        user: userItem,
+        favouriteImages: userData.favourites
+      })
+      console.warn(userData, userItem);
+    }
   }
 
   componentDidUpdate(prevProps, prevState, snapshot){
-    // console.warn('prevState', prevState.selectedBreed);
-    if(this.state.selectedBreed != prevState.selectedBreed){
-      // this.fetchSubBreeds()
-    }
+
   }
     
   updateCookies(cookieAccepted){
@@ -165,16 +181,13 @@ class App extends React.Component {
     let urls = [];
     if (hasSubBreed && selectedSubBreed != ''){
       urls.push(breedOnly, subs);
-      // console.warn('url', urls)
     } else {
       urls.push(breedOnly)
-      // console.warn('url', urls)
     }
 
     for(var i = 0; i < urls.length; i++){
       this.fetchImagesAPI(urls[i])
     }
-    
   }
 
   fetchImagesAPI(url){
@@ -224,6 +237,49 @@ class App extends React.Component {
     }
   }
 
+  addFavouriteImage(imageItem){
+    const currentFavourites = this.state.favouriteImages
+    let newFavourites = [];
+    if (this.state.favouriteImages.length === 0){
+      newFavourites.push(imageItem)
+      this.setState({
+        favouriteImages: newFavourites
+      })
+      this.setFaveCookies(newFavourites)
+    } else if (this.state.favouriteImages.length > 0) {
+      this.handleCheck(imageItem)
+    }
+
+    
+  }
+  
+  handleCheck(imageItem) {
+    let newFavourites = [];
+    if(this.state.favouriteImages.some(item => imageItem.id === item.id) === true){
+      newFavourites = this.state.favouriteImages.filter(item => imageItem.id != item.id)
+    } else {
+      newFavourites = [...this.state.favouriteImages, imageItem]
+    }
+    this.setState({
+      favouriteImages: newFavourites
+    })
+    this.setFaveCookies(newFavourites)
+  }
+
+  setFaveCookies(newFavourites){
+    console.warn('newFavourites', newFavourites);
+    const { cookies } = this.props;
+    let userData = cookies.get('user')
+    let userItem = {
+      userName: this.state.user.userName,
+      stateDate: this.state.user.stateDate,
+      favourites: newFavourites,
+      userActive: this.state.user.userActive
+    }
+    console.warn(userData, userItem);
+    cookies.set('user', userItem, { path: '/' });
+  }
+
     
   render(){
       
@@ -232,6 +288,9 @@ class App extends React.Component {
     const setNumber = this.setNumber;
     const selectBreed = this.selectBreed;
     const updateCookies = this.updateCookies;
+    const addFavouriteImage = this.addFavouriteImage;
+    const handleCheck = this.handleCheck;
+    // const handleFavouriteToggle = this.handleCheck;
     // states
     // arrays
     const breeds = Object.keys(this.state.breeds);
@@ -241,6 +300,7 @@ class App extends React.Component {
     const imagesToShow = this.state.imagesToShow;
     const imageList = this.state.imageList;
     const {user} = this.state.user;
+    const favouriteImages = this.state.favouriteImages;
     // booleons
     // const cookiesAccepted = this.state.cookiesAccepted;
     const BreedsAreLoaded = this.state.BreedsAreLoaded;
@@ -272,6 +332,7 @@ class App extends React.Component {
                 subBreeds={subBreeds}
                 selectedSubBreed={selectedSubBreed}
                 imageList={imageList}
+                favouriteImages={favouriteImages}
                 // numbers
                 imagesToShow={imagesToShow}
                 maxImages={maxImages}
@@ -279,9 +340,10 @@ class App extends React.Component {
                 selectBreed={selectBreed}
                 setNumber={setNumber}
                 displayImages={displayImages}
+                addFavouriteImage={addFavouriteImage}
                 />} 
               />
-            <Route path="user" element={<Userpage />} />
+            <Route path="user" element={<Userpage favouriteImages={favouriteImages} addFavouriteImage={addFavouriteImage} />} />
           </Route>
         </Routes>
         
