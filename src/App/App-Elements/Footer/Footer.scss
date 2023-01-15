@@ -3,8 +3,10 @@ footer.app-footer {
     box-shadow: 3px -2px 3px 2px #fff;
     width: 100%;
     min-height: 10vh;
-    position: relative;
+    position: fixed;
     bottom: 0;
+    z-index: 2;
+    background-color: #282c34;
     .footer-container {
         width: calc(100% - 20px);
         height: calc(100% - 20px);

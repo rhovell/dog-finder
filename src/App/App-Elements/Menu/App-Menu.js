@@ -50,7 +50,7 @@ class AppMenu extends React.Component {
                                     <Link className="nav-link" to={'/'} onClick={toggleMenuState}>Dog Finder</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link" to={'/user'} onClick={toggleMenuState}>My Favourites</Link>
+                                    <Link className="nav-link" to={'/favourites'} onClick={toggleMenuState}>My Favourites</Link>
                                 </li>
                             </ul>
                         </nav>

@@ -219,6 +219,8 @@ class App extends React.Component {
         imageList: newImages,
         isLoading: false
       })
+    var getMeTo = document.querySelector("#displayResults");
+    getMeTo.scrollIntoView({ behavior: 'smooth' }, true);
 
   }
 
@@ -343,7 +345,9 @@ class App extends React.Component {
                 addFavouriteImage={addFavouriteImage}
                 />} 
               />
-            <Route path="user" element={<Userpage favouriteImages={favouriteImages} addFavouriteImage={addFavouriteImage} />} />
+            <Route path="favourites" element={
+              <Userpage favouriteImages={favouriteImages} addFavouriteImage={addFavouriteImage} 
+              />} />
           </Route>
         </Routes>
         

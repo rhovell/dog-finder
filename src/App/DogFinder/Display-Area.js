@@ -20,21 +20,21 @@ class DisplayArea extends React.Component {
     }
     componentDidUpdate(prevProps) {
         if (prevProps.favouriteImages != this.props.favouriteImages){
-            console.warn('this.props', this.props.favouriteImages);
+            // console.warn('this.props', this.props.favouriteImages);
             
         }
         
     }
 
-    handleFavouriteToggle(i, image, imageTitle){
-        console.warn('i, image, imageTitle', i, image, imageTitle);
+    handleFavouriteToggle(i, image, imageTitle, isFave){
+        console.warn('i, image, imageTitle', i, image, imageTitle, isFave);
         let imgItem = {
             id: imageTitle+i,
             title: imageTitle,
             url: image,
-            fave: true
+            fave: isFave
         }
-        console.warn('selectedImage', imgItem);
+        // console.warn('selectedImage', imgItem);
         this.props.addFavouriteImage(imgItem)
         
     }
@@ -51,13 +51,21 @@ class DisplayArea extends React.Component {
         const handleFavouriteToggle = this.handleFavouriteToggle;
 
         return (
-            <div className="results-area">
+            <div className="results-area" id="displayResults">
                 <div className="image-results">
                     {
                         imageList.map((image, i) => (
                             <div key = {'dog' + i}>
                                 <div className='image-container' >
-                                    <FavouriteContainer imageTitle={imageTitle} favouriteImages={favouriteImages} image={image} i={i} id={selectedBreed+i} handleFavouriteToggle={handleFavouriteToggle}></FavouriteContainer>
+                                    <FavouriteContainer 
+                                    imageTitle={imageTitle} 
+                                    favouriteImages={favouriteImages} 
+                                    image={image} 
+                                    i={i} 
+                                    id={selectedBreed +i} 
+                                    isFave={false}
+                                    handleFavouriteToggle={handleFavouriteToggle}
+                                    />
                                 </div>
                                 <DogPaw></DogPaw>
                             </div>
