@@ -16,9 +16,22 @@
         border-radius: 360px;
         padding: 2px;
         display: flex;
+        cursor: pointer;
         svg {
             width: 100%;
             height: auto;
+        }
+    }
+}
+
+@media screen and (min-width: 1024px){
+    .page-overlay {
+        button.scrollToTop {
+            right: 20px;
+            svg {
+                width: 80px;
+                height: auto;
+            }
         }
     }
 }
