@@ -13,7 +13,6 @@ class CookieBar extends React.Component {
     }
 
     handleCookies(){
-        // console.warn(getCookieConsentValue())
         let cookieAccepted = getCookieConsentValue();
         this.props.updateCookies(cookieAccepted)
     }

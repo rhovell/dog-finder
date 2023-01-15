@@ -1,4 +1,4 @@
-import './DogFinder.scss';
+import './styles/DogFinder.scss';
 import '../Form-items/form.scss';
 import BreedSelector from '../Form-items/Breed-Selector.js' 
 import React from "react";
@@ -20,13 +20,6 @@ class DogFinder extends React.Component {
         this.tellMe = this.tellMe.bind(this)
 
     }
-    
-    componentDidUpdate(prevProps) {
-        // if (prevProps.text !== this.props.text) {
-        //     this.updateAndNotify();
-        //     console.warn(this.props)
-        // }
-    }
 
     tellMe(e){
         e.preventDefault()
@@ -46,21 +39,16 @@ class DogFinder extends React.Component {
         const SubBreadsAreLoaded = this.props.SubBreadsAreLoaded;
         const selectSubBreed = this.props.selectSubBreed;
         const maxImages = this.props.maxImages;
-        const viewMode = this.props.viewMode;
         const displayImages = this.props.displayImages;
         const setNumber = this.props.setNumber;
         const imageList = this.props.imageList;
         const selectedSubBreed = this.props.selectedSubBreed ? this.props.selectedSubBreed : '';
-        const tellMe = this.tellMe;
         const howToActive = this.state.howToActive;
         const isLoading = this.props.isLoading;
         const favouriteImages = this.props.favouriteImages;
         const addFavouriteImage = this.props.addFavouriteImage;
         const userIsActive = this.props.userIsActive;
-
-        
-
-        // if (!BreedsAreLoaded) return <div className="loading-area">Loading...</div>
+        const tellMe = this.tellMe;
 
         return (
             <div className="dog-finder-form">

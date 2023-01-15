@@ -40,9 +40,7 @@ class BreedSelector extends React.Component {
     }
 
     render() {
-        // const selectBreed = this.props.selectBreed
         const breeds = this.props.breeds
-        const selectedBreed = this.props.selectedBreed ? this.props.selectedBreed : '';
         const value = this.state.value;
         const handleChange = this.handleChange;
 

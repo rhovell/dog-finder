@@ -1,7 +1,7 @@
 import React from "react";
-import {ReactComponent as HeartLogo } from './heart.svg'
-import {ReactComponent as HeartLogoFilled } from './filled-heart.svg'
-import './images.scss'
+import {ReactComponent as HeartLogo } from './assets/heart.svg'
+import {ReactComponent as HeartLogoFilled } from './assets/filled-heart.svg'
+import './styles/images.scss'
 
 
 class FavouriteContainer extends React.Component {
@@ -16,12 +16,10 @@ class FavouriteContainer extends React.Component {
 
     componentDidMount(){
         if (this.props.favouriteImages.some(item => this.props.id === item.id) === true) {
-            console.warn('fave exists');
             this.setState({
                 active: true
             })
         } else {
-            console.warn('fave doesnt exist');
             this.setState({
                 active: false
             })
@@ -30,20 +28,17 @@ class FavouriteContainer extends React.Component {
 
     shouldComponentUpdate(nextState) {
         if (this.props.favouriteImages !== nextState.favouriteImages) {
-            console.warn('faves changed');
             return true
         } else {
-            console.warn('faves same');
             return false
         };
     }
 
     handleClick(e, i, image, imageTitle, id, isFave){
+        e.preventDefault();
         this.setState({
             active: !isFave
         })
-        console.warn('FavouriteContainer', i, image, imageTitle, id, isFave);
-        e.preventDefault();
         this.props.handleFavouriteToggle(i, image, imageTitle, id, isFave)
     }
 

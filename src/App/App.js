@@ -35,10 +35,7 @@ class App extends React.Component {
       isLoading: true,
       cookiesAccepted: false,
       user: cookies.get('user') || 'Null',
-      favouriteImages: [],
-      favouriteSearches: [],
-      favouriteBreeds: [],
-      searchHistory: []
+      favouriteImages: []
     };
     this.updateCookies = this.updateCookies.bind(this);
     this.setUser = this.setUser.bind(this);
@@ -73,7 +70,6 @@ class App extends React.Component {
     const { cookies } = this.props;
     let userData = cookies.get('user')
     if (userData){
-      console.warn('user exists');
       let userItem = {
         userName: userData.userName,
         stateDate: userData.stateDate,
@@ -84,7 +80,6 @@ class App extends React.Component {
         user: userItem,
         favouriteImages: userData.favourites
       })
-      console.warn(userData, userItem);
     }
   }
 
@@ -122,7 +117,6 @@ class App extends React.Component {
       }
 
       cookies.set('user', userItem, { path: '/' });
-      // cookies.set('stateDate', stateDate, { path: '/' });
       this.setState({ 
         user: userItem
        });
@@ -130,22 +124,19 @@ class App extends React.Component {
   }
 
   selectBreed(selectedBreed) {
-    console.warn('selectBreed(event)', selectedBreed)
-    // if (this.state.selectedBreed != []){
-      this.setState({
-        selectedBreed: [],
-        hasSubBreed: false,
-        SubBreadsAreLoaded: false,
-        subBreeds: [],
-        selectedSubBreed: [],
-        images: [],
-        maxImages: 0,
-        viewMode: false,
-        imagesToShow: 1,
-        imageList: [],
-        isLoading: true
-      })
-    // }
+    this.setState({
+      selectedBreed: [],
+      hasSubBreed: false,
+      SubBreadsAreLoaded: false,
+      subBreeds: [],
+      selectedSubBreed: [],
+      images: [],
+      maxImages: 0,
+      viewMode: false,
+      imagesToShow: 1,
+      imageList: [],
+      isLoading: true
+    })
     selectedBreed = selectedBreed.toLowerCase();
     // console.warn('selectedBreed',selectedBreed)
     this.setState({
@@ -166,7 +157,6 @@ class App extends React.Component {
         hasSubBreed: true
       })
     }
-    console.warn(subBreeds);
   }
     
   fetchImages(){
@@ -190,7 +180,6 @@ class App extends React.Component {
   }
 
   fetchImagesAPI(url){
-    console.warn(url);
     fetch(url)
       .then((res) => res.json())
       .then((json) => {
@@ -268,7 +257,6 @@ class App extends React.Component {
   }
 
   setFaveCookies(newFavourites){
-    console.warn('newFavourites', newFavourites);
     const { cookies } = this.props;
     let userData = cookies.get('user')
     let userItem = {
@@ -277,7 +265,6 @@ class App extends React.Component {
       favourites: newFavourites,
       userActive: this.state.user.userActive
     }
-    console.warn(userData, userItem);
     cookies.set('user', userItem, { path: '/' });
   }
 
@@ -290,8 +277,7 @@ class App extends React.Component {
     const selectBreed = this.selectBreed;
     const updateCookies = this.updateCookies;
     const addFavouriteImage = this.addFavouriteImage;
-    const handleCheck = this.handleCheck;
-    // const handleFavouriteToggle = this.handleCheck;
+
     // states
     // arrays
     const breeds = Object.keys(this.state.breeds);
@@ -303,7 +289,6 @@ class App extends React.Component {
     const {user} = this.state.user;
     const favouriteImages = this.state.favouriteImages;
     // booleons
-    // const cookiesAccepted = this.state.cookiesAccepted;
     const BreedsAreLoaded = this.state.BreedsAreLoaded;
     const SubBreadsAreLoaded = this.state.SubBreadsAreLoaded;
     const hasSubBreed = this.state.hasSubBreed;
