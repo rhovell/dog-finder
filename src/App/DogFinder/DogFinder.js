@@ -56,6 +56,7 @@ class DogFinder extends React.Component {
         const isLoading = this.props.isLoading;
         const favouriteImages = this.props.favouriteImages;
         const addFavouriteImage = this.props.addFavouriteImage;
+        const userIsActive = this.props.userIsActive;
 
         
 
@@ -78,24 +79,26 @@ class DogFinder extends React.Component {
 
                     <div className="app-area">
                         
-                            <form className='dog-finder' onSubmit={(e) => displayImages(e)}>
+                        <form className='dog-finder' onSubmit={(e) => displayImages(e)}>
 
-                                <BreedSelector selectedBreed={selectedBreed} selectedSubBreed={selectedSubBreed} breeds={breeds} selectBreed={selectBreed}></BreedSelector>
+                            <BreedSelector selectedBreed={selectedBreed} selectedSubBreed={selectedSubBreed} breeds={breeds} selectBreed={selectBreed}></BreedSelector>
 
-                                {hasSubBreed ? <SubbreedSelector subBreeds={subBreeds} selectSubBreed={selectSubBreed}></SubbreedSelector>
-                                :
-                                <></>}
-                                
-                                {SubBreadsAreLoaded ? <AmountSelector maxImages={maxImages} setNumber={setNumber}></AmountSelector>
-                                : <></>}
+                            {hasSubBreed ? <SubbreedSelector subBreeds={subBreeds} selectSubBreed={selectSubBreed}></SubbreedSelector>
+                            :
+                            <></>}
+                            
+                            {SubBreadsAreLoaded ? <AmountSelector maxImages={maxImages} setNumber={setNumber}></AmountSelector>
+                            : <></>}
 
-                                {SubBreadsAreLoaded ? <Submit></Submit>
-                                : <></>}
-                                
-                            </form>
+                            {SubBreadsAreLoaded ? <Submit></Submit>
+                            : <></>}
+                            
+                        </form>
 
-                        
-                        <DisplayArea BreedsAreLoaded={BreedsAreLoaded}
+                    
+                        <DisplayArea 
+                            userIsActive={userIsActive}
+                            BreedsAreLoaded={BreedsAreLoaded}
                             selectedBreed={selectedBreed}
                             imageList={imageList}
                             selectedSubBreed={selectedSubBreed}
@@ -104,7 +107,7 @@ class DogFinder extends React.Component {
                         </DisplayArea> 
                         
                     </div>
-                    </>
+                </>
                 } 
             </div>
         );

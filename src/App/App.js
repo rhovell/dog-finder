@@ -328,6 +328,7 @@ class App extends React.Component {
                 hasSubBreed={hasSubBreed}
                 viewMode={viewMode}
                 isLoading={isLoading}
+                userIsActive={userIsActive}
                 // arrays
                 breeds={breeds}
                 selectedBreed={selectedBreed}

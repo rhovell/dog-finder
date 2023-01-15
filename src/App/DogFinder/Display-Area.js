@@ -49,6 +49,7 @@ class DisplayArea extends React.Component {
         const selectedSubBreed = this.props.selectedSubBreed ? this.props.selectedSubBreed : '';
         const imageTitle = this.props.selectedSubBreed != '' ? selectedBreed + ', ' + selectedSubBreed : selectedBreed;
         const handleFavouriteToggle = this.handleFavouriteToggle;
+        const userIsActive = this.props.userIsActive;
 
         return (
             <div className="results-area" id="displayResults">
@@ -57,15 +58,18 @@ class DisplayArea extends React.Component {
                         imageList.map((image, i) => (
                             <div key = {'dog' + i}>
                                 <div className='image-container' >
-                                    <FavouriteContainer 
-                                    imageTitle={imageTitle} 
-                                    favouriteImages={favouriteImages} 
-                                    image={image} 
-                                    i={i} 
-                                    id={selectedBreed +i} 
-                                    isFave={false}
-                                    handleFavouriteToggle={handleFavouriteToggle}
+                                    {userIsActive ?
+                                    <FavouriteContainer
+                                        imageTitle={imageTitle}
+                                        favouriteImages={favouriteImages}
+                                        image={image}
+                                        i={i}
+                                        id={selectedBreed + i}
+                                        isFave={false}
+                                        handleFavouriteToggle={handleFavouriteToggle}
                                     />
+                                        : <img alt={imageTitle} className="search-result-image" title={imageTitle} src={image} id={selectedBreed + i}></img>}
+                                    
                                 </div>
                                 <DogPaw></DogPaw>
                             </div>
