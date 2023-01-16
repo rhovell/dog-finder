@@ -192,7 +192,7 @@ class App extends React.Component {
     let breedOnly = 'https://dog.ceo/api/breed/' + breed + '/images';
     let subs = 'https://dog.ceo/api/breed/' + breed + '/' + selectedSubBreed + '/images';
     let urls = [];
-    if (hasSubBreed && selectedSubBreed != ''){
+    if (hasSubBreed && selectedSubBreed !== ''){
       urls.push(breedOnly, subs);
     } else {
       urls.push(breedOnly)
@@ -269,7 +269,7 @@ class App extends React.Component {
   handleCheck(imageItem) {
     let newFavourites = [];
     if(this.state.favouriteImages.some(item => imageItem.id === item.id) === true){
-      newFavourites = this.state.favouriteImages.filter(item => imageItem.id != item.id)
+      newFavourites = this.state.favouriteImages.filter(item => imageItem.id !== item.id)
     } else {
       newFavourites = [...this.state.favouriteImages, imageItem]
     }
