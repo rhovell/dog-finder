@@ -1,6 +1,6 @@
 import React from "react";
 import './Footer.scss'
-import CookieConsent, { getCookieConsentValue, resetCookieConsentValue } from "react-cookie-consent";
+import CookieConsent, { getCookieConsentValue } from "react-cookie-consent";
 
 
 class Footer extends React.Component {
