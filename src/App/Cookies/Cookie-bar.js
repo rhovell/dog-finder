@@ -1,4 +1,4 @@
-import CookieConsent, { Cookies, getCookieConsentValue, resetCookieConsentValue } from "react-cookie-consent";
+import CookieConsent, { getCookieConsentValue, resetCookieConsentValue } from "react-cookie-consent";
 import React from "react";
 
 

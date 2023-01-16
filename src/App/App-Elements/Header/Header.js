@@ -1,7 +1,7 @@
 import React from "react";
 import './Header.scss'
 import AppMenu from '../Menu/App-Menu.js'
-import { Outlet, Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 
 class Header extends React.Component {

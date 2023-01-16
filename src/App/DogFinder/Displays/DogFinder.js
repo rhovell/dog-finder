@@ -22,7 +22,7 @@ class DogFinder extends React.Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        if (this.props != nextProps || this.state != nextState) {
+        if (this.props !== nextProps || this.state !== nextState) {
             return true
         } else {
             return false

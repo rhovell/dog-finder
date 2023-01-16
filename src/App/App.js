@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import './App.scss';
 import DogFinder from './DogFinder/Displays/DogFinder.js'
 import Footer from './App-Elements/Footer/Footer.js';
@@ -252,7 +252,6 @@ class App extends React.Component {
   }
 
   addFavouriteImage(imageItem){
-    const currentFavourites = this.state.favouriteImages
     let newFavourites = [];
     if (this.state.favouriteImages.length === 0){
       newFavourites.push(imageItem)
@@ -311,7 +310,6 @@ class App extends React.Component {
     const subBreeds = this.state.subBreeds;
     const imagesToShow = this.state.imagesToShow;
     const imageList = this.state.imageList;
-    const {user} = this.state.user;
     const favouriteImages = this.state.favouriteImages;
     // booleons
     const BreedsAreLoaded = this.state.BreedsAreLoaded;

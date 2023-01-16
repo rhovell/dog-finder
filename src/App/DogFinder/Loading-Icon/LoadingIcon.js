@@ -11,7 +11,7 @@ class LoadingIcon extends React.Component {
             <div className="loading-icon">
                 <div className="center">
                     <p>Fetching...</p>
-                    <img src={loader} className="spin" style={{width:'55px',height:'55px'}}></img>
+                    <img alt="" src={loader} className="spin" style={{width:'55px',height:'55px'}}></img>
                 </div>
             </div>
 

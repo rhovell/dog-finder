@@ -13,7 +13,7 @@ class BreedSelector extends React.Component {
     }
 
     componentDidMount(){
-        if(this.props.selectedBreed != this.state.value){
+        if(this.props.selectedBreed !== this.state.value){
             this.setState({
                 value: this.props.selectedBreed
             })
@@ -27,7 +27,7 @@ class BreedSelector extends React.Component {
             value: selectedValue
         })
         setTimeout(function () {
-            if(this.state.value != ''){
+            if(this.state.value !== ''){
                 this.setBreed()
             }
         }.bind(this), 1000);

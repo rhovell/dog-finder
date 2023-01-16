@@ -2,7 +2,7 @@ import React from "react";
 import './Userpage.scss'
 import FavouriteContainer from '../DogFinder/Displays/FavouriteContainer.js'
 import { ReactComponent as DogPaw } from '../DogFinder/Displays/assets/dog-paw.svg'
-import { Outlet, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import ScrollUpButton from '../ScrollUpButton.js';
 
 class Userpage extends React.Component {
@@ -17,7 +17,7 @@ class Userpage extends React.Component {
     }
 
     shouldComponentUpdate(nextProps){
-        if (this.props.favouriteImages != nextProps.favouriteImages || this.props.showScrollBtn != nextProps.showScrollBtn){
+        if (this.props.favouriteImages !== nextProps.favouriteImages || this.props.showScrollBtn !== nextProps.showScrollBtn){
             return true
         } else {
             return false

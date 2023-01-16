@@ -1,4 +1,3 @@
-import BreedSelector from '../Form-items/Breed-Selector.js' 
 import React from "react";
 import './styles/results-area.scss'
 import FavouriteContainer from './FavouriteContainer.js'
@@ -34,7 +33,7 @@ class DisplayArea extends React.Component {
         const selectedBreed = this.props.selectedBreed;
         const imageList = this.props.imageList;
         const selectedSubBreed = this.props.selectedSubBreed ? this.props.selectedSubBreed : '';
-        const imageTitle = this.props.selectedSubBreed != '' ? selectedBreed + ', ' + selectedSubBreed : selectedBreed;
+        const imageTitle = this.props.selectedSubBreed !== '' ? selectedBreed + ', ' + selectedSubBreed : selectedBreed;
         const handleFavouriteToggle = this.handleFavouriteToggle;
         const userIsActive = this.props.userIsActive;
 
