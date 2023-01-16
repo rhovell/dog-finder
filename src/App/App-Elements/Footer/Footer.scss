@@ -12,6 +12,8 @@ footer.app-footer {
         height: calc(100% - 20px);
         padding: 10px 10px 20px;
         ul.footer-link-list {
+            font-family: 'Roboto';
+            font-weight: 400;
             display: flex;
             flex-direction: column;
             list-style: none;
@@ -31,6 +33,34 @@ footer.app-footer {
                         border-bottom: 1px solid #26cfdd;
                         color: #26cfdd;
                     }
+                }
+                &.reset-cookies {
+                    padding-top: 15px;
+                    .CookieConsent {
+                        position: relative!important;
+                        display: inline-block!important;
+                        width: auto!important;
+                        z-index: 0!important;
+                        background: transparent!important;
+                        cursor: pointer;
+                        .inline-cookies {
+                            display: none!important;
+                        }
+                        .inline-space {
+                            display: inline-block!important;
+                            button {
+                                margin: 0 5px!important;
+                            }
+                        }
+                    }
+                    // button {
+                    //     background: transparent;
+                    //     border: none;
+                    //     padding: 5px;
+                    //     color: #FFFFFF;
+                    //     font-size: 18px;
+                    //     cursor: pointer;
+                    // }
                 }
             }
         }

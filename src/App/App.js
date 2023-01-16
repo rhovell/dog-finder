@@ -327,7 +327,7 @@ class App extends React.Component {
   
       <div className="App" id="app">
         <Routes>
-          <Route path="/" element={<Header userIsActive={userIsActive}/>}>
+          <Route path="/" element={<Header userIsActive={userIsActive}  />}>
             <Route index element={
               <DogFinder 
               // booleons
@@ -364,7 +364,7 @@ class App extends React.Component {
           </Route>
         </Routes>
         
-        <Footer></Footer>
+        <Footer updateCookies={updateCookies} userIsActive={userIsActive}></Footer>
         <CookieBar updateCookies={updateCookies}></CookieBar>
       </div>
     );

@@ -1,6 +1,6 @@
 import CookieConsent, { getCookieConsentValue } from "react-cookie-consent";
 import React from "react";
-
+import './cookieBar.scss'
 
 class CookieBar extends React.Component {
     constructor(props) {
@@ -27,7 +27,34 @@ class CookieBar extends React.Component {
                 onAccept={() => {
                     handleCookies()
                 }}
+                flipButtons
+                buttonText='Yes please!'
+                declineButtonText='No Thanks'
+                overlay={true}
                 enableDeclineButton
+                buttonWrapperClasses="flex-space"
+                buttonStyle={{
+                    backgroundColor: '#059700',
+                    color: 'white',
+                    fontWeight: "bolder",
+                    borderRadius: '6px',
+                    fontSize: '24px',
+                    padding: '7px 12px'
+                }}
+                declineButtonStyle={{
+                    backgroundColor: '#fd0101',
+                    color: 'black',
+                    fontWeight: "bolder",
+                    borderRadius: '6px',
+                    fontSize: '24px',
+                    padding: '7px 12px'
+                }}
+                style={{
+                    display: "flex"
+                }}
+                onOverlayClick={() => {
+                    handleCookies()
+                }}
                 onDecline={() => {
                     handleCookies();
                 }}>
