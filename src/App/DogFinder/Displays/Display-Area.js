@@ -16,7 +16,6 @@ class DisplayArea extends React.Component {
     }
 
     handleFavouriteToggle(i, image, imageTitle, isFave){
-        console.warn('i, image, imageTitle', i, image, imageTitle, isFave);
         let imgItem = {
             id: imageTitle+i,
             title: imageTitle,
@@ -33,7 +32,7 @@ class DisplayArea extends React.Component {
         const selectedBreed = this.props.selectedBreed;
         const imageList = this.props.imageList;
         const selectedSubBreed = this.props.selectedSubBreed ? this.props.selectedSubBreed : '';
-        const imageTitle = this.props.selectedSubBreed !== '' ? selectedBreed + ', ' + selectedSubBreed : selectedBreed;
+        const imageTitle = this.props.selectedSubBreed.length > 0 ? selectedBreed + ', ' + selectedSubBreed : selectedBreed;
         const handleFavouriteToggle = this.handleFavouriteToggle;
         const userIsActive = this.props.userIsActive;
 
@@ -45,16 +44,16 @@ class DisplayArea extends React.Component {
                             <div className="grid-box" key = {'dog' + i}>
                                 <div className='image-container' >
                                     {userIsActive ?
-                                    <FavouriteContainer
-                                        imageTitle={imageTitle}
-                                        favouriteImages={favouriteImages}
-                                        image={image}
-                                        i={i}
-                                        id={selectedBreed + i}
-                                        isFave={false}
-                                        handleFavouriteToggle={handleFavouriteToggle}
-                                    />
-                                        : <img alt={imageTitle} className="search-result-image" title={imageTitle} src={image} id={selectedBreed + i}></img>}
+                                        <FavouriteContainer
+                                            imageTitle={imageTitle}
+                                            favouriteImages={favouriteImages}
+                                            image={image}
+                                            i={i}
+                                            id={selectedBreed + i}
+                                            isFave={false}
+                                            handleFavouriteToggle={handleFavouriteToggle}
+                                        />
+                                    : <img alt={imageTitle} className="search-result-image" title={imageTitle} src={image} id={selectedBreed + i}></img>}
                                     
                                 </div>
                                 <DogPaw></DogPaw>
