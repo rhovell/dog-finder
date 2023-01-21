@@ -50,7 +50,6 @@ class App extends React.Component {
     this.setFaveCookies = this.setFaveCookies.bind(this);
     this.checkForUser = this.checkForUser.bind(this);
     this.onScroll = this.onScroll.bind(this);
-    // this.isBottom = this.isBottom.bind(this);
   }
 
   componentDidMount() {
@@ -161,7 +160,7 @@ class App extends React.Component {
       imageList: [],
       isLoading: true
     })
-    selectedBreed = selectedBreed.toLowerCase();
+    selectedBreed = selectedBreed;
     // console.warn('selectedBreed',selectedBreed)
     this.setState({
       selectedBreed: selectedBreed

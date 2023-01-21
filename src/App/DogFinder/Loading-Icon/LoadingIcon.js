@@ -2,10 +2,7 @@ import React from "react";
 import loader from './loading.png'
 import './loading-icon.scss'
 
-class LoadingIcon extends React.Component {
-
-
-    render() {
+function LoadingIcon(props) {
         return (
   
             <div className="loading-icon">
@@ -16,7 +13,6 @@ class LoadingIcon extends React.Component {
             </div>
 
         );
-    }
 }
 
 export default LoadingIcon;

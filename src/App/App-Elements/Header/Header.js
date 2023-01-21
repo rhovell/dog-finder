@@ -4,15 +4,13 @@ import AppMenu from '../Menu/App-Menu.js'
 import { Outlet } from "react-router-dom";
 
 
-class Header extends React.Component {
+function Header(props) {
 
+    const userIsActive = props.userIsActive;
+    const favouriteImages = props.favouriteImages;
 
-    render() {
-        const userIsActive = this.props.userIsActive;
-        const favouriteImages = this.props.favouriteImages;
-
-        return (
-            <>
+    return (
+        <>
             <header className="App-header">
                 <div className="title-container">
                     <h1>Dog Finder</h1>
@@ -22,11 +20,10 @@ class Header extends React.Component {
                 : <></>
                 }
             </header>
-                <Outlet favouriteImages={favouriteImages}/>
-                </>
+            <Outlet favouriteImages={favouriteImages}/>
+        </>
 
-        );
-    }
+    );
 }
 
 export default Header;
